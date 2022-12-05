@@ -2,9 +2,10 @@ import { PaginationParams } from '@/decorators/pagination.decorator'
 import { PaginationParamsDto } from '@/modules/base/base.dto'
 import { PaginatedUserDto, UserCreateDto, UserDto } from '@/modules/user/user.dto'
 import { UserService } from '@/modules/user/user.service'
-import { BadRequestException, Body, Controller, Get, Logger, Post, Req } from '@nestjs/common'
+import { BadRequestException, Body, Controller, Delete, Get, Logger, Param, Post, Req, UseGuards } from '@nestjs/common'
 import { Request } from 'express'
 import { BaseController } from '@/controllers/base/base.controller'
+import { TokenGuard } from '@/modules/auth/token.guard'
 
 @Controller('users')
 export class UsersController extends BaseController<UserService> {
@@ -28,5 +29,12 @@ export class UsersController extends BaseController<UserService> {
     const result = await this.userService.create({ ...data, password: hash })
 
     return new UserDto(result)
+  }
+
+  @Delete(':id')
+  @UseGuards(TokenGuard)
+  public async deleteItem(@Req() req: Request, @Param('id') id: number) {
+    // console.log(req)
+    return await super.deleteItem(req, id)
   }
 }

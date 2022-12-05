@@ -13,10 +13,10 @@ export class AuthController {
   @Post()
   public async signin(@Req() req: Request, @Body() payload: SignInDto) {
     const user = await this.userService.findOne({ email: payload.email }).catch(() => null)
-    if (!user) throw new BadRequestException('User not found')
+    if (!user) throw new BadRequestException('User Not Found')
 
     const bool = await this.authService.compareHash(user, payload.password)
-    if (!bool) throw new BadRequestException('Password mismatch')
+    if (!bool) throw new BadRequestException('Password Incorrect!')
 
     const token = await this.tokenService.create({
       uid: user.id,
@@ -41,7 +41,7 @@ export class AuthController {
       .findOneById(refreshToken.id)
       .catch((e) => Promise.reject(new UnauthorizedException()))
 
-    if (!token.valid) throw new UnauthorizedException('Reuse refresh token detected!')
+    if (!token.valid) throw new UnauthorizedException('Refresh Token Reusing Detected!')
 
     await this.tokenService.updateOneById(token.id, {
       valid: false,
