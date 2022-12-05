@@ -10,7 +10,7 @@ import { Model, QueryOptions, UpdateQuery } from 'mongoose'
 type ModelPropertyOf<T> = ExtractModel<PropertyOf<T>>
 
 @Injectable()
-export class BaseService<T extends BaseDocument> {
+export class BaseService<T extends BaseDocument = BaseDocument> {
   constructor(@InjectModel('model') private model: Model<T>) {}
 
   public async create(data: PropertyOf<ExtractModel<T>>): Promise<T> {

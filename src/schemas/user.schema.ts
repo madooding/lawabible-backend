@@ -9,10 +9,10 @@ export class User extends Base {
     if (user) Object.assign(this, user)
   }
 
-  @Prop({ unique: true })
+  @Prop({ type: String, unique: true, required: true })
   email!: string
 
-  @Prop()
+  @Prop({ type: String, required: true })
   password!: string
 }
 

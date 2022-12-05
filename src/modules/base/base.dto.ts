@@ -58,7 +58,7 @@ export class PaginationParamsDto implements Partial<PaginationParams> {
   order?: Order
 }
 
-export class PaginatedResultDto<T> implements PaginatedResult<T> {
+export class PaginatedResultDto<T = any> implements PaginatedResult<T> {
   constructor(data?: PaginatedResultDto<T>) {
     Object.assign(this, data)
   }
