@@ -21,7 +21,10 @@ export class UserDto extends BaseDto {
 }
 
 @Expose()
-export class UserCreateDto extends PickType(UserDto, ['email', 'password']) {}
+export class CreateUserDto extends PickType(UserDto, ['email', 'password']) {}
+
+@Expose()
+export class EditUserDto extends PickType(UserDto, []) {}
 
 export class PaginatedUserDto extends PaginatedResultDto<UserDto> {
   @Expose()

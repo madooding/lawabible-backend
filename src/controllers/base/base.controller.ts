@@ -1,6 +1,7 @@
 import { PaginationParams } from '@/decorators/pagination.decorator'
 import { BaseDto, PaginatedResultDto, PaginationParamsDto } from '@/modules/base/base.dto'
 import { BaseService } from '@/modules/base/base.service'
+import { BaseDocument } from '@/schemas/base.schema'
 import {
   Body,
   Controller,
@@ -13,10 +14,11 @@ import {
   Put,
   Req,
 } from '@nestjs/common'
+import { plainToInstance } from 'class-transformer'
 import { Request } from 'express'
 
 @Controller()
-export class BaseController<T extends BaseService<any>> {
+export class BaseController<T extends BaseService<D>, D extends BaseDocument = any> {
   constructor(private baseService: T) {}
 
   @Get()
@@ -32,15 +34,19 @@ export class BaseController<T extends BaseService<any>> {
   @Get(':id')
   public async getItem(@Req() req: Request, @Param('id') id: number): Promise<any> {
     const result = await this.baseService.findOneById(id)
-    return new BaseDto(result)
+
+    return {
+      ...plainToInstance(BaseDto, result.toObject()),
+    }
   }
 
   @Post()
   public async createItem(@Req() req: Request, @Body() body: any): Promise<any> {
-    console.log(body)
     try {
       const result = await this.baseService.create(body)
-      return new BaseDto(result)
+      return {
+        ...plainToInstance(BaseDto, result.toObject()),
+      }
     } catch (e) {
       throw new InternalServerErrorException((e as any).message)
     }
@@ -49,7 +55,10 @@ export class BaseController<T extends BaseService<any>> {
   @Put(':id')
   public async updateItem(@Req() req: Request, @Param('id') id: number, @Body() body: any): Promise<any> {
     const result = await this.baseService.updateOneById(id, body)
-    return new BaseDto(result)
+
+    return {
+      ...plainToInstance(BaseDto, result.toObject()),
+    }
   }
 
   @Delete(':id')
