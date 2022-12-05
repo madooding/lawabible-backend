@@ -1,7 +1,8 @@
 import { BaseDto, PaginatedResultDto } from '@/modules/base/base.dto'
 import { PropertyOf } from '@/types'
-import { Exclude, Expose, Type } from 'class-transformer'
-import { IsEmail, IsOptional } from 'class-validator'
+import { PickType } from '@nestjs/swagger'
+import { Expose, Type } from 'class-transformer'
+import { IsEmail, IsString } from 'class-validator'
 
 @Expose()
 export class UserDto extends BaseDto {
@@ -12,12 +13,15 @@ export class UserDto extends BaseDto {
 
   @Expose()
   @IsEmail()
-  @IsOptional()
   email!: string
 
-  @Exclude()
+  @Expose({ toClassOnly: true })
+  @IsString()
   password!: string
 }
+
+@Expose()
+export class UserCreateDto extends PickType(UserDto, ['email', 'password']) {}
 
 export class PaginatedUserDto extends PaginatedResultDto<UserDto> {
   @Expose()

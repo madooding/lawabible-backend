@@ -3,7 +3,6 @@ import { BaseDto, PaginatedResultDto, PaginationParamsDto } from '@/modules/base
 import { BaseService } from '@/modules/base/base.service'
 import { BaseDocument } from '@/schemas/base.schema'
 import {
-  BadRequestException,
   Body,
   Controller,
   Delete,
@@ -32,13 +31,14 @@ export class BaseController<S extends BaseService<D>, D extends BaseDocument = B
   }
 
   @Get(':id')
-  public async getItem(@Req() req: Request, @Param('id') id: number): Promise<BaseDto> {
+  public async getItem(@Req() req: Request, @Param('id') id: number): Promise<any> {
     const result = await this.baseService.findOneById(id)
     return new BaseDto(result)
   }
 
   @Post()
-  public async createItem(@Req() req: Request, @Body() body: any): Promise<BaseDto> {
+  public async createItem(@Req() req: Request, @Body() body: any): Promise<any> {
+    console.log(body)
     try {
       const result = await this.baseService.create(body)
       return new BaseDto(result)
@@ -48,7 +48,7 @@ export class BaseController<S extends BaseService<D>, D extends BaseDocument = B
   }
 
   @Put(':id')
-  public async updateItem(@Req() req: Request, @Param('id') id: number, @Body() body: any): Promise<BaseDto> {
+  public async updateItem(@Req() req: Request, @Param('id') id: number, @Body() body: any): Promise<any> {
     const result = await this.baseService.updateOneById(id, body)
     return new BaseDto(result)
   }
