@@ -5,7 +5,7 @@ import { UserService } from '@/modules/user/user.service'
 import { UserDocument } from '@/schemas/user.schema'
 import { BadRequestException, Body, Controller, Get, Logger, Post, Req } from '@nestjs/common'
 import { Request } from 'express'
-import { BaseController } from '../base/base.controller'
+import { BaseController } from '@/controllers/base/base.controller'
 
 @Controller('users')
 export class UsersController extends BaseController<UserService, UserDocument> {
