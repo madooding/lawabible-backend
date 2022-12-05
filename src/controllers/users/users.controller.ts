@@ -2,13 +2,12 @@ import { PaginationParams } from '@/decorators/pagination.decorator'
 import { PaginationParamsDto } from '@/modules/base/base.dto'
 import { PaginatedUserDto, UserCreateDto, UserDto } from '@/modules/user/user.dto'
 import { UserService } from '@/modules/user/user.service'
-import { UserDocument } from '@/schemas/user.schema'
 import { BadRequestException, Body, Controller, Get, Logger, Post, Req } from '@nestjs/common'
 import { Request } from 'express'
 import { BaseController } from '@/controllers/base/base.controller'
 
 @Controller('users')
-export class UsersController extends BaseController<UserService, UserDocument> {
+export class UsersController extends BaseController<UserService> {
   private logger: Logger = new Logger('User Controller')
 
   constructor(private userService: UserService) {

@@ -1,7 +1,6 @@
 import { PaginationParams } from '@/decorators/pagination.decorator'
 import { BaseDto, PaginatedResultDto, PaginationParamsDto } from '@/modules/base/base.dto'
 import { BaseService } from '@/modules/base/base.service'
-import { BaseDocument } from '@/schemas/base.schema'
 import {
   Body,
   Controller,
@@ -17,8 +16,8 @@ import {
 import { Request } from 'express'
 
 @Controller()
-export class BaseController<S extends BaseService<D>, D extends BaseDocument = BaseDocument> {
-  constructor(private baseService: S) {}
+export class BaseController<T extends BaseService<any>> {
+  constructor(private baseService: T) {}
 
   @Get()
   public async getAll(
