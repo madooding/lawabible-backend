@@ -32,6 +32,21 @@
 $ npm install
 ```
 
+## Environment Variables
+
+Create a new file ```.env``` in root directory then copy below content
+
+```
+DB_HOST=
+DB_USER=
+DB_PASSWORD=
+SECRET_ACCESS_TOKEN=
+SECRET_REFRESH_TOKEN=
+
+NODE_ENV=development
+NODE_PORT=3000
+```
+
 ## Running the app
 
 ```bash
