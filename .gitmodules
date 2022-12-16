@@ -1,0 +1,3 @@
+[submodule "src/lib/lawabible-json"]
+	path = src/lib/lawabible-json
+	url = https://github.com/madooding/lawabible-json.git
