@@ -1,4 +1,4 @@
-import { ChapterDto } from './../../modules/chapter/chapter.dto'
+import { ChapterDto } from '@/modules/chapter/chapter.dto'
 import { ChapterService } from '@/modules/chapter/chapter.service'
 import { BaseController } from '@/controllers/base/base.controller'
 import {
@@ -7,7 +7,6 @@ import {
   Delete,
   Get,
   MethodNotAllowedException,
-  NotFoundException,
   Param,
   Post,
   Put,
@@ -17,8 +16,6 @@ import { Request } from 'express'
 import { PaginationParamsDto, PaginatedResultDto } from '@/modules/base/base.dto'
 import { PaginationParams } from '@/decorators/pagination.decorator'
 import { PaginatedChapterDto } from '@/modules/chapter/chapter.dto'
-import { ParamsDictionary } from 'express-serve-static-core'
-import { ParsedQs } from 'qs'
 
 @Controller('chapters')
 export class ChaptersController extends BaseController<ChapterService> {
