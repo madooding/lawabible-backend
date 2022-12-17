@@ -1,8 +1,11 @@
 import { ChapterContentType } from '@/constants/chapter'
 
 export type IChapter = {
-  chapter: number
+  bookId: number
   bookName: string
+  bookNameLW: string
+  bookNameTH: string
+  chapter: number
   contents: IChapterContent[]
 }
 

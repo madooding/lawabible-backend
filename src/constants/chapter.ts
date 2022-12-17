@@ -4,4 +4,5 @@ export enum ChapterContentType {
   Verse = 'verse',
   References = 'references',
   Italic = 'italic',
+  Paragraph = 'paragraph',
 }

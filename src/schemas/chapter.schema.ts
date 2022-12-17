@@ -11,6 +11,15 @@ export class Chapter extends Base implements IChapter {
   }
 
   @Prop({ type: Number, required: true })
+  bookId!: number
+
+  @Prop({ type: String, required: true })
+  bookNameLW!: string
+
+  @Prop({ type: String, required: true })
+  bookNameTH!: string
+
+  @Prop({ type: Number, required: true })
   chapter!: number
 
   @Prop({ type: String, required: true })

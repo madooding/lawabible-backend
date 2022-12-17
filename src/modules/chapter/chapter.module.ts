@@ -1,6 +1,5 @@
-import { User, UserSchema } from '@/schemas/user.schema'
 import { createMongooseModule } from '@/helpers'
-import { Chapter } from '@/schemas/chapter.schema'
+import { Chapter, ChapterSchema } from '@/schemas/chapter.schema'
 import { getConnectionToken, MongooseModule } from '@nestjs/mongoose'
 import { Module } from '@nestjs/common'
 import { ChapterService } from './chapter.service'
@@ -10,7 +9,7 @@ import { ChapterService } from './chapter.service'
     MongooseModule.forFeatureAsync([
       {
         name: Chapter.name,
-        useFactory: (connection) => createMongooseModule(User, UserSchema, connection),
+        useFactory: (connection) => createMongooseModule(Chapter, ChapterSchema, connection),
         inject: [getConnectionToken()],
       },
     ]),

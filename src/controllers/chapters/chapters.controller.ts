@@ -7,6 +7,6 @@ export class ChaptersController extends BaseController<ChapterService> {
   constructor(private chapterService: ChapterService) {
     super(chapterService)
 
-    this.chapterService.readPreInitJSON()
+    this.chapterService.preInit()
   }
 }
